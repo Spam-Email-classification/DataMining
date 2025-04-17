@@ -6,7 +6,6 @@ public class LogisticRegression {
     private double[] weights;
     private double learningRate = 0.01;
     private int iterations = 1000;
-    private double lambda = 0.1; // Regularization parameter
 
     public LogisticRegression(int n_features) {
         weights = new double[n_features + 1]; // +1 for bias term
@@ -31,91 +30,72 @@ public class LogisticRegression {
         return sigmoid(predictRaw(x)) >= 0.5 ? 1 : 0;
     }
 
-    // Train the logistic regression model with given data and labels
+// hàm huấn luyện
     public void train(double[][] X, int[] Y) {
-        int m = X.length; // number of training examples
-        int n = X[0].length; // number of features
+        
+        
+        
+        int m = X.length; // số bản ghi
+        int n = X[0].length; // số features
         for (int iter = 0; iter < iterations; iter++) {
+            // 1 vòng epoch: mô hình duyệt qua toàn bộ dữ liệu 1 lần để
+            // cập nhập trọng số
+            
+            
+            
+            // Khởi tạo mảng để lưu đạo hàm
             double[] gradients = new double[n + 1];
 
             for (int j = 0; j < m; j++) {
+                // lấy bản ghi thứ j
                 double[] x = X[j];
+                
+                // label của mẫu thứ j
                 int y = Y[j];
+                
+                // dự đoán
                 double prediction = sigmoid(predictRaw(x)); // Apply sigmoid to the raw score
+                
+                // chenh lech giữa thực tế và dự đoán
                 double error = prediction - y;
-
+                
+                // tính gradient
+                // cộng dồn tất cả các đạo hàm rồi tính trung bình
                 gradients[0] += error; // Gradient for bias term
                 for (int k = 0; k < n; k++) {
                     gradients[k + 1] += error * x[k];
                 }
             }
-            // Regularization term (L2 Regularization)
-            for (int k = 1; k < weights.length; k++) {
-                gradients[k] += lambda * weights[k];
-            }
-
-            // Update weights with the gradient and learning rate
+                
+            
+            //Cập  nhập trọng số wi = wi + learningRate * gradients[i]/m
             for (int k = 0; k < weights.length; k++) {
                 weights[k] -= learningRate * gradients[k] / m;
             }
-            // Optional: Print loss for every 100th iteration to monitor progress
+
+            // in ra Loss để giám sát mô hình
             if (iter % 100 == 0) {
                 double loss = computeLoss(X, Y);
                 System.out.printf("Epoch %d - Loss: %.4f\n", iter, loss);
             }}}
 
+    // hàm tính Loss````
     private double computeLoss(double[][] X, int[] Y) {
         double loss = 0.0;
         int m = X.length;
 
         for (int i = 0; i < m; i++) {
+            
+            // Kq dữ đoán
             double prediction = sigmoid(predictRaw(X[i]));
-            int y = Y[i];
+            int y = Y[i]; // nhãn
+            // công thích tính Loss
             loss += -y * Math.log(prediction + 1e-15) - (1 - y) * Math.log(1 - prediction + 1e-15);
         }
 
-        for (int i = 1; i < weights.length; i++) {
-            loss += lambda * weights[i] * weights[i]; // L2 regularization
-        }
-
+      // Loss trung bình của m mẫu (J(w))
         return loss / m;
     }
 
-    // Standardize the dataset (zero mean, unit variance) before training
-    public static double[][] standardize(double[][] X) {
-        int m = X.length;
-        int n = X[0].length;
-
-        double[][] standardized = new double[m][n];
-
-        // Calculate mean and standard deviation for each feature
-        double[] means = new double[n];
-        double[] stdDevs = new double[n];
-
-        for (int i = 0; i < n; i++) {
-            double sum = 0;
-            for (int j = 0; j < m; j++) {
-                sum += X[j][i];
-            }
-            means[i] = sum / m;
-
-            double varianceSum = 0;
-            for (int j = 0; j < m; j++) {
-                varianceSum += Math.pow(X[j][i] - means[i], 2);
-            }
-            stdDevs[i] = Math.sqrt(varianceSum / m);
-        }
-
-        // Standardize the data
-        for (int i = 0; i < m; i++) {
-            for (int j = 0; j < n; j++) {
-                standardized[i][j] = (X[i][j] - means[j]) / stdDevs[j];
-            }
-        }
-
-        return standardized;
-    }
-
-    // Evaluate the model's performance on a test set
-    
+   
 }

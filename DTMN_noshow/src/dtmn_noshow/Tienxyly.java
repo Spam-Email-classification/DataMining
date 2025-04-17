@@ -21,16 +21,13 @@ public class Tienxyly {
     public static ArrayList<Benhnhan> loadData(String filePath) {
         ArrayList<Benhnhan> dataList = new ArrayList<>();
 
-        SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy"); // đúng format trong file CSV
 
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
             String line = br.readLine(); // bỏ qua dòng tiêu đề
             while ((line = br.readLine()) != null) {
                 String[] token = line.split(",");
 
-                if (token.length < 9) {
-                    continue; // bỏ qua dòng thiếu cột
-                }
+     
                 double gender = Double.parseDouble(token[0]);
                 double age = Double.parseDouble(token[3]);
 
@@ -39,7 +36,6 @@ public class Tienxyly {
                 double appDate = Double.parseDouble(token[2]);
 
                 long diffDays = (long) ((appDate - bookDate) / (1000 * 60 * 60 * 24));
-
                 double schoolarship = Double.parseDouble(token[4]);
                 double Hipertension = Double.parseDouble(token[5]);
                 double Diabetes = Double.parseDouble(token[6]);
@@ -65,7 +61,6 @@ public class Tienxyly {
                 dataList.add(new Benhnhan(features, label));
             }
             
-            // HELLOW CA NHA
 
         } catch (Exception e) {
             System.out.println("Lỗi khi đọc file CSV: " + e.getMessage());
