@@ -31,11 +31,8 @@ public class Benhnhan {
     public int getLabel() {
         return label;
     }
-
+    
     public void setLabel(int label) {
         this.label = label;
     }
-    
-    
-    
 }

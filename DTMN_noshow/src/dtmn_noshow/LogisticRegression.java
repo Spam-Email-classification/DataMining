@@ -35,8 +35,6 @@ public class LogisticRegression {
     public void train(double[][] X, int[] Y) {
         int m = X.length; // number of training examples
         int n = X[0].length; // number of features
-
-        // Gradient Descent loop
         for (int iter = 0; iter < iterations; iter++) {
             double[] gradients = new double[n + 1];
 
@@ -51,7 +49,6 @@ public class LogisticRegression {
                     gradients[k + 1] += error * x[k];
                 }
             }
-
             // Regularization term (L2 Regularization)
             for (int k = 1; k < weights.length; k++) {
                 gradients[k] += lambda * weights[k];
@@ -61,16 +58,12 @@ public class LogisticRegression {
             for (int k = 0; k < weights.length; k++) {
                 weights[k] -= learningRate * gradients[k] / m;
             }
-
             // Optional: Print loss for every 100th iteration to monitor progress
             if (iter % 100 == 0) {
                 double loss = computeLoss(X, Y);
                 System.out.printf("Epoch %d - Loss: %.4f\n", iter, loss);
-            }
-        }
-    }
+            }}}
 
-    // Compute the logistic regression loss (log loss with regularization)
     private double computeLoss(double[][] X, int[] Y) {
         double loss = 0.0;
         int m = X.length;
@@ -81,7 +74,6 @@ public class LogisticRegression {
             loss += -y * Math.log(prediction + 1e-15) - (1 - y) * Math.log(1 - prediction + 1e-15);
         }
 
-        // Add regularization term to the loss
         for (int i = 1; i < weights.length; i++) {
             loss += lambda * weights[i] * weights[i]; // L2 regularization
         }

@@ -1,9 +1,7 @@
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
-*/
-
-
+ */
 package dtmn_noshow;
 
 import javax.swing.*;
@@ -27,9 +25,11 @@ public class TestUI extends JFrame {
         String[] labels = {
             "Tuổi",
             "Giới tính (0=Nam, 1=Nữ)",
-            "Khoảng cách đến bệnh viện (km)",
-            "Có bệnh nền? (0/1)",
-            "Số lần khám trước đó",
+            "Có hỗ trợ bảo hiểm (Có = 1, Không = 0)",
+            "Bị Cao huyết áp (0/1)",
+            "Bị tiểu đường (0/1) ",
+            "Bị nghiện rượu (0/1) ",
+            "Bị khuyết tật (0/1)",
             "Đã nhận SMS? (0/1)",
             "Số ngày chờ"
         };
@@ -66,7 +66,9 @@ public class TestUI extends JFrame {
             input[3] = Double.parseDouble(inputFields[3].getText()); // chronic disease
             input[4] = Double.parseDouble(inputFields[4].getText()); // previous appointments
             input[5] = Double.parseDouble(inputFields[5].getText()); // SMS received
-            input[6] = Double.parseDouble(inputFields[6].getText()) / 30.0; // normalize waiting days
+            input[6] = Double.parseDouble(inputFields[6].getText());
+            input[7] = Double.parseDouble(inputFields[7].getText());
+            input[8] = Double.parseDouble(inputFields[8].getText()) / 30.0;
 
             int prediction = model.predict(input);
             if (prediction == 1) {

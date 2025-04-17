@@ -95,16 +95,13 @@ public class Tienxyly {
     //Đánh giá độ chính xác của mô hình
 public static void evaluateAccuracy(LogisticRegression model, ArrayList<Benhnhan> testSet) {
      int tp = 0, tn = 0, fp = 0, fn = 0;
-     
      double[][] X_test = new double[testSet.size()][testSet.get(0).features.length];
      int[] Y_test = new int[testSet.size()];
      
      // Chuyển dữ liệu kiểm tra thành mảng cho LogisticRegression
      for (int i = 0; i < testSet.size(); i++) {
          X_test[i] = testSet.get(i).features;
-         Y_test[i] = testSet.get(i).label;
-     }
-
+         Y_test[i] = testSet.get(i).label;}
      for (int i = 0; i < X_test.length; i++) {
          int pred = model.predict(X_test[i]);
          int actual = Y_test[i];
@@ -116,15 +113,11 @@ public static void evaluateAccuracy(LogisticRegression model, ArrayList<Benhnhan
          } else if (pred == 1 && actual == 0) {
              fp++;
          } else if (pred == 0 && actual == 1) {
-             fn++;
-         }
-     }
-
+             fn++;}}
      double accuracy = (double) (tp + tn) / testSet.size();
      double precision = tp + fp == 0 ? 0 : (double) tp / (tp + fp);
      double recall = tp + fn == 0 ? 0 : (double) tp / (tp + fn);
      double f1 = (precision + recall == 0) ? 0 : 2 * precision * recall / (precision + recall);
-
      System.out.printf("Accuracy: %.2f%%\n", accuracy * 100);
      System.out.printf("Precision: %.2f%%\n", precision * 100);
      System.out.printf("Recall: %.2f%%\n", recall * 100);

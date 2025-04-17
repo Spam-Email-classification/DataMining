@@ -7,16 +7,13 @@ import javax.swing.SwingUtilities;
 public class DTMN_noshow {
 
     public static void main(String[] args) {
-        ArrayList<Benhnhan> dataset = Tienxyly.loadData("C:\\NetBeansProjects\\datasetcsv_edit2.csv");
-
+        ArrayList<Benhnhan> dataset = Tienxyly.loadData("C:\\NetBeansProjects\\datasetcsv_edit27.csv");
         if (dataset.isEmpty()) {
             System.out.println("Không đọc được dữ liệu từ file CSV. Vui lòng kiểm tra lại.");
-            return;
-        }
+            return; }
 
         int m = dataset.size();
         int n = dataset.get(0).features.length;
-
         System.out.println("Du lieu da xu ly xong. So mau: " + m);
 
         // 1️⃣ Tách tập train/test
@@ -24,8 +21,7 @@ public class DTMN_noshow {
         ArrayList<Benhnhan> testSet = new ArrayList<>();
         Tienxyly.splitData(dataset, trainSet, testSet, 0.8);
 
-        System.out.println("Tap huan luyen: " + trainSet.size() + ", Tập kiểm tra: " + testSet.size());
-
+        System.out.println("Tap huan luyen: " + trainSet.size() + ", Tap kiem tra: " + testSet.size());
         // 2️⃣ Chuẩn bị dữ liệu huấn luyện
         double[][] X_train = new double[trainSet.size()][n];
         int[] Y_train = new int[trainSet.size()];
