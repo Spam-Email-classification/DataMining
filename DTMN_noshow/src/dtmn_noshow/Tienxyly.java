@@ -43,11 +43,12 @@ public class Tienxyly {
                 double Handcap = Double.parseDouble(token[8]);
                 double SMS_received = Double.parseDouble(token[9]);
 
-                int label = token[10].equalsIgnoreCase("Yes") ? 1 : 0;
+                int label = token[10].equals("Yes") ? 1 : 0;
+
 
 
                 double[] features = {
-                    age / 100.0,
+                    age /100,
                     gender,
                     schoolarship,
                     Hipertension,
@@ -55,7 +56,7 @@ public class Tienxyly {
                     Alcoholism,
                     Handcap,
                     SMS_received,
-                    diffDays / 30.0 // khoảng cách ngày, chuẩn hóa theo tháng
+                    diffDays/30  // khoảng cách ngày, chuẩn hóa theo tháng
                 };
 
                 dataList.add(new Benhnhan(features, label));
@@ -117,6 +118,6 @@ public static void evaluateAccuracy(LogisticRegression model, ArrayList<Benhnhan
      System.out.printf("Precision: %.2f%%\n", precision * 100);
      System.out.printf("Recall: %.2f%%\n", recall * 100);
      System.out.printf("F1 Score: %.2f%%\n", f1 * 100);
-     System.out.printf("TP: %d, TN: %d, FP: %d, FN: %d\n", tp, tn, fp, fn);
+//     System.out.printf("TP: %d, TN: %d, FP: %d, FN: %d\n", tp, tn, fp, fn);
 }
 }

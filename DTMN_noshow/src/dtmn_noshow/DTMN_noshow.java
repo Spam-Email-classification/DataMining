@@ -7,7 +7,7 @@ import javax.swing.SwingUtilities;
 public class DTMN_noshow {
 
     public static void main(String[] args) {
-        ArrayList<Benhnhan> dataset = Tienxyly.loadData("C:\\NetBeansProjects\\dataset (1).csv");
+        ArrayList<Benhnhan> dataset = Tienxyly.loadData("C:\\NetBeansProjects\\datasetcsv_edit2 (2).csv");
         if (dataset.isEmpty()) {
             System.out.println("Không đọc được dữ liệu từ file CSV. Vui lòng kiểm tra lại.");
             return; }
