@@ -7,7 +7,7 @@ import javax.swing.SwingUtilities;
 public class DTMN_noshow {
 
     public static void main(String[] args) {
-        ArrayList<Benhnhan> dataset = Tienxyly.loadData("C:\\NetBeansProjects\\datasetcsv_edit27.csv");
+        ArrayList<Benhnhan> dataset = Tienxyly.loadData("C:\\NetBeansProjects\\dataset (1).csv");
         if (dataset.isEmpty()) {
             System.out.println("Không đọc được dữ liệu từ file CSV. Vui lòng kiểm tra lại.");
             return; }
@@ -37,10 +37,6 @@ public class DTMN_noshow {
         // 4️⃣ Đánh giá
         Tienxyly.evaluateAccuracy(model, testSet);
 
-//        // 5️⃣ Dự đoán thử
-//        double[] newPatient = {0.30, 1.0, 2.5, 0, 1, 1, 0.25}; // đã chuẩn hóa
-//        int prediction = model.predict(newPatient);
-//        System.out.println("KET QUA DU DOAN BENH NHAN MOI: " + (prediction == 1 ? "NO SHOW" : "DEN KHAM"));
 
  // Khởi động giao diện
     SwingUtilities.invokeLater(() -> {
